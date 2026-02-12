@@ -6,7 +6,8 @@
       "sounds": [
         { "file": "Greeting_HiItsMe.mp3", "line": "Hi, it's me" },
         { "file": "Greeting_OhYeah.mp3", "line": "Oh yeah?" },
-        { "file": "Greeting_SomethingToSay.mp3", "line": "Something you wanna say to me?" }
+        { "file": "Greeting_SomethingToSay.mp3", "line": "Something you wanna say to me?" },
+        { "file": "ResourceLimit_LordTakeMe.mp3", "line": "I wish the Lord would take me now" }
       ]
     },
     "acknowledge": {
@@ -31,7 +32,8 @@
         { "file": "Error_OofMarone.mp3", "line": "Oof, marone!" },
         { "file": "Error_FkThat.mp3", "line": "F*ck that" },
         { "file": "Error_Wtf.mp3", "line": "What the f*ck?" },
-        { "file": "Error_FknInterwebs.mp3", "line": "F*ckin' internet" }
+        { "file": "Error_FknInterwebs.mp3", "line": "F*ckin' internet" },
+        { "file": "ResourceLimit_LordTakeMe.mp3", "line": "I wish the Lord would take me now" }
       ]
     },
     "permission": {
