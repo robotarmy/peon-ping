@@ -4,9 +4,9 @@
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Claude Code](https://img.shields.io/badge/Claude_Code-hook-ffab01)
 
-**Your units ping you when Claude Code needs attention.**
+**Your Peon pings you when Claude Code needs attention.**
 
-Claude Code doesn't notify you when it finishes or needs permission. You tab away, lose focus, and waste 15 minutes getting back into flow. peon-ping fixes this with classic game sounds from Warcraft III, StarCraft, and Red Alert 2 — so you never miss a beat.
+Claude Code doesn't notify you when it finishes or needs permission. You tab away, lose focus, and waste 15 minutes getting back into flow. peon-ping fixes this with Warcraft III Peon voice lines — so you never miss a beat, and your terminal sounds like Orgrimmar.
 
 **See it in action** &rarr; [peon-ping.vercel.app](https://peon-ping.vercel.app/)
 
@@ -20,14 +20,12 @@ One command. Takes 10 seconds. macOS and WSL2 (Windows). Re-run to update (sound
 
 ## What you'll hear
 
-Depending on your selected sound pack:
-
 | Event | Sound | Examples |
 |---|---|---|
-| Session starts | Greeting | *"Ready to work?"* (Peon), *"Ready to roll out"* (Siege Tank), *"Good to go, sir"* (SCV) |
-| Task finishes | Acknowledgment | *"Work, work."* (Peon), *"Affirmative"* (Science Vessel), *"Job's done!"* (Peasant) |
-| Permission needed | Alert | *"What?"* (Peon), *"Receiving"* (Science Vessel), *"The doctor is in"* (Medic) |
-| Rapid prompts (3+ in 10s) | Easter egg | Varies by pack |
+| Session starts | Greeting | *"Ready to work?"*, *"Yes?"*, *"What you want?"* |
+| Task finishes | Acknowledgment | *"Work, work."*, *"I can do that."*, *"Okie dokie."* |
+| Permission needed | Alert | *"Something need doing?"*, *"Hmm?"*, *"What you want?"* |
+| Rapid prompts (3+ in 10s) | Easter egg | *"Me busy, leave me alone!"* |
 
 Plus Terminal tab titles (`● project: done`) and desktop notifications when your terminal isn't focused.
 
