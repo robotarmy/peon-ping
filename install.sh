@@ -417,6 +417,8 @@ for pack in $PACKS; do
 
   PACK_INDEX=$((PACK_INDEX + 1))
 
+  # Clear old sound files before downloading new ones (fixes stale files after pack updates)
+  rm -rf "$INSTALL_DIR/packs/$pack/sounds"
   mkdir -p "$INSTALL_DIR/packs/$pack/sounds"
 
   # Get source info from registry (or use fallback)
