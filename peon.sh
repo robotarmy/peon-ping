@@ -1394,7 +1394,7 @@ for sid, pack_data in session_packs.items():
             session_packs_clean[sid] = pack_data
     elif sid == session_id:
         # Old format, upgrade active session
-        session_packs_clean[sid] = {'pack': pack_data, 'last_used': now}
+        session_packs_clean[sid] = dict(pack=pack_data, last_used=now)
     elif isinstance(pack_data, str):
         # Old format for inactive sessions - keep only if we can't determine age
         # This is a migration path; on next use, it will be upgraded
@@ -1422,7 +1422,7 @@ if rotation_mode == 'agentskill':
         if candidate and os.path.isdir(candidate_dir):
             active_pack = candidate
             # Update timestamp for this session
-            session_packs[session_id] = {'pack': candidate, 'last_used': time.time()}
+            session_packs[session_id] = dict(pack=candidate, last_used=time.time())
             state['session_packs'] = session_packs
             state_dirty = True
         else:
@@ -1433,7 +1433,7 @@ if rotation_mode == 'agentskill':
             state['session_packs'] = session_packs
             state_dirty = True
     else:
-        # No assignment: check session_packs["default"] (for Cursor users without conversation_id)
+        # No assignment: check session_packs 'default' key (for Cursor users without conversation_id)
         default_data = session_packs.get('default')
         if default_data:
             candidate = default_data.get('pack', default_data) if isinstance(default_data, dict) else default_data
@@ -1628,7 +1628,7 @@ if state_dirty:
 
 # --- iTerm2 tab color mapping ---
 # Configurable via config.json: tab_color.enabled (default true),
-# tab_color.colors.{ready,working,done,needs_approval} as [r,g,b] arrays.
+# tab_color.colors.(ready|working|done|needs_approval) as [r,g,b] arrays.
 tab_color_rgb = ''
 if tab_color_enabled:
     default_colors = {
@@ -1638,7 +1638,7 @@ if tab_color_enabled:
         'needs_approval': [150, 70, 70],   # muted red
     }
     custom = tab_color_cfg.get('colors', {})
-    colors = {k: custom.get(k, v) for k, v in default_colors.items()}
+    colors = dict((k, custom.get(k, v)) for k, v in default_colors.items())
     status_key = status.replace(' ', '_') if status else ''
     if status_key in colors:
         rgb = colors[status_key]
