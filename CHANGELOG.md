@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.5.0 (2026-02-18)
+
+### Added
+- `cwd` field in `last_active` state (`.state.json`) — records the working directory of each hook invocation, enabling [peon-pet](https://github.com/PeonPing/peon-pet) to display the project folder name in session dot tooltips
+
 ## v2.4.1 (2026-02-18)
 
 ### Fixed
