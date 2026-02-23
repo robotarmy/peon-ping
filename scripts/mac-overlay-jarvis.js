@@ -14,6 +14,7 @@ function run(argv) {
   var bundleId   = argv[5] || '';
   var idePid     = parseInt(argv[6], 10) || 0;
   var sessionTty = argv[7] || '';  // TTY of the Claude session (for window focus)
+  var subtitle   = argv[8] || '';  // Context subtitle (e.g. tool info, last message)
 
   var accentR = 0.0, accentG = 0.75, accentB = 1.0;
   switch (color) {
@@ -398,18 +399,18 @@ function run(argv) {
     return label;
   }
 
-  win.contentView.addSubview(makeCentered('J.A.R.V.I.S', wcy+16, 24, 'AvenirNext-Bold', accentR, accentG, accentB, 1.0));
+  win.contentView.addSubview(makeCentered('J.A.R.V.I.S', wcy+16, 14, 'AvenirNext-Medium', accentR, accentG, accentB, 0.6));
   win.contentView.addSubview(makeCentered(typeText, wcy-2, 9, 'AvenirNext-Medium', accentR, accentG, accentB, 0.6));
 
   // Message — split into individually centered lines that fit within maxMW
-  var msgFontName = 'AvenirNext-Regular', msgFontSize = 11;
+  var msgFontName = 'AvenirNext-Regular', msgFontSize = 14;
   var msgFont = $.NSFont.fontWithNameSize(msgFontName, msgFontSize);
   if (!msgFont || msgFont.isNil()) msgFont = $.NSFont.systemFontOfSize(msgFontSize);
   var maxMW = 180;
   var tmp = $.NSTextField.alloc.initWithFrame($.NSMakeRect(0,0,400,20));
   tmp.setFont(msgFont); tmp.setBezeled(false);
 
-  // Word-wrap into lines that fit
+  // Word-wrap message into lines that fit
   var words = message.split(' '), lines = [], curLine = '';
   for (var wi=0; wi<words.length; wi++) {
     var test = curLine ? curLine + ' ' + words[wi] : words[wi];
@@ -422,11 +423,37 @@ function run(argv) {
 
   // Position block: center vertically in the lower portion of the circle
   var lineH = 14;
-  var blockCenter = wcy - 46;
+  var blockCenter = wcy - 40;
   var topLineY = blockCenter + ((lines.length - 1) * lineH) / 2;
   for (var li=0; li<lines.length; li++) {
     var yPos = topLineY - li * lineH;
     win.contentView.addSubview(makeCentered(lines[li], yPos, msgFontSize, msgFontName, 0.85, 0.9, 1.0, 0.75));
+  }
+
+  // Context subtitle — smaller, word-wrapped, below project name
+  if (subtitle) {
+    var subFontSize = 11, subFontName = 'AvenirNext-Regular';
+    var subFont = $.NSFont.fontWithNameSize(subFontName, subFontSize);
+    if (!subFont || subFont.isNil()) subFont = $.NSFont.systemFontOfSize(subFontSize);
+    var subTmp = $.NSTextField.alloc.initWithFrame($.NSMakeRect(0,0,400,20));
+    subTmp.setFont(subFont); subTmp.setBezeled(false);
+    var subMaxW = 160;
+    var subWords = subtitle.split(' '), subLines = [], subCur = '';
+    for (var sw=0; sw<subWords.length; sw++) {
+      var subTest = subCur ? subCur + ' ' + subWords[sw] : subWords[sw];
+      subTmp.setStringValue($(subTest)); subTmp.sizeToFit;
+      if (subTmp.frame.size.width > subMaxW && subCur) {
+        subLines.push(subCur); subCur = subWords[sw];
+      } else { subCur = subTest; }
+    }
+    if (subCur) subLines.push(subCur);
+    if (subLines.length > 2) subLines = [subLines[0], subLines[1] + '...'];
+    var subLineH = 13;
+    var subTopY = topLineY - lines.length * lineH - 4;
+    for (var sl=0; sl<subLines.length; sl++) {
+      var subYPos = subTopY - sl * subLineH;
+      win.contentView.addSubview(makeCentered(subLines[sl], subYPos, subFontSize, subFontName, 0.75, 0.8, 0.9, 0.55));
+    }
   }
 
   // ── Click-to-dismiss + focus correct window ──

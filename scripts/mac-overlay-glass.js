@@ -14,6 +14,7 @@ function run(argv) {
   var bundleId   = argv[5] || '';
   var idePid     = parseInt(argv[6], 10) || 0;
   var sessionTty = argv[7] || '';  // TTY of the Claude session (for window focus)
+  var subtitle   = argv[8] || '';  // Context subtitle (e.g. tool info, last message)
 
   // ── Type text ──
   var typeText = 'INPUT REQUIRED';
@@ -177,6 +178,32 @@ function run(argv) {
   for (var li = 0; li < lines.length; li++) {
     var yPos = topLineY - li * lineH;
     win.contentView.addSubview(makeLabel(lines[li], textX, yPos, msgFontSize, msgFontName, 0.95, 0.95, 0.95, 0.9));
+  }
+
+  // Context subtitle — smaller, word-wrapped, below message
+  if (subtitle) {
+    var subFontSize = 10, subFontName = 'HelveticaNeue';
+    var subFont = $.NSFont.fontWithNameSize(subFontName, subFontSize);
+    if (!subFont || subFont.isNil()) subFont = $.NSFont.systemFontOfSize(subFontSize);
+    var subTmp = $.NSTextField.alloc.initWithFrame($.NSMakeRect(0,0,400,20));
+    subTmp.setFont(subFont); subTmp.setBezeled(false);
+    var subMaxW = maxMW - 20;
+    var subWords = subtitle.split(' '), subLines = [], subCur = '';
+    for (var sw=0; sw<subWords.length; sw++) {
+      var subTest = subCur ? subCur + ' ' + subWords[sw] : subWords[sw];
+      subTmp.setStringValue($(subTest)); subTmp.sizeToFit;
+      if (subTmp.frame.size.width > subMaxW && subCur) {
+        subLines.push(subCur); subCur = subWords[sw];
+      } else { subCur = subTest; }
+    }
+    if (subCur) subLines.push(subCur);
+    if (subLines.length > 2) subLines = [subLines[0], subLines[1] + '...'];
+    var subLineH = 13;
+    var subTopY = topLineY - lines.length * lineH - 3;
+    for (var sl=0; sl<subLines.length; sl++) {
+      var subYPos = subTopY - sl * subLineH;
+      win.contentView.addSubview(makeLabel(subLines[sl], textX, subYPos, subFontSize, subFontName, 0.7, 0.75, 0.85, 0.55));
+    }
   }
 
   // Timestamp
