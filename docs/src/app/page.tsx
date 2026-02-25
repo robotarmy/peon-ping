@@ -821,11 +821,11 @@ export default function LandingPage() {
           <h1>Stop babysitting your terminal</h1>
           <p className="hero-badge" style={{ textAlign: "center", margin: "0 auto 1rem", fontSize: "0.85rem", color: "var(--wc3-text-dim)" }}>
             <span style={{ display: "inline-block", background: "rgba(255,215,0,0.08)", border: "1px solid rgba(255,215,0,0.2)", borderRadius: 6, padding: "4px 12px" }}>
-              The project that inspired <a href="https://code.visualstudio.com/updates" style={{ color: "var(--wc3-gold)", textDecoration: "none" }}>native sound hooks in VS Code</a>
+              The project that inspired <a href="https://x.com/pierceboggan/status/2022114493141254300" style={{ color: "var(--wc3-gold)", textDecoration: "none" }}>native sound hooks in VS Code</a> (50M+ users)
             </span>
           </p>
           <p className="hero-sub">
-            Game character voice lines the instant your AI agent finishes or needs permission. Or let the agent choose its own sound via MCP. The idea that inspired Microsoft to add native sound hooks to VS Code. Works with <strong>Claude Code</strong>, <strong>Codex</strong>, <strong>Cursor</strong>, <strong>OpenCode</strong>, <strong>Kiro</strong>, <strong>Windsurf</strong>, <strong>Antigravity</strong>, and more. Never lose flow to a silent terminal again.
+            Game character voice lines the instant your AI agent finishes or needs permission. Or let the agent choose its own sound via MCP. The idea that inspired Microsoft to add native sound hooks to VS Code for 50M+ users. Works with <strong>Claude Code</strong>, <strong>Codex</strong>, <strong>Cursor</strong>, <strong>OpenCode</strong>, <strong>Kiro</strong>, <strong>Windsurf</strong>, <strong>Antigravity</strong>, and more. Never lose flow to a silent terminal again.
           </p>
           <CopyBlock command="brew install PeonPing/tap/peon-ping" />
           <p style={{ textAlign: "center", marginTop: "0.75rem", color: "var(--wc3-text-dim)", fontSize: "0.85rem" }}>
