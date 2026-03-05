@@ -443,6 +443,14 @@ class RelayHandler(http.server.BaseHTTPRequestHandler):
             self.wfile.write(b"OK")
             return
 
+        if parsed.path == "/state":
+            state = load_state()
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.end_headers()
+            self.wfile.write(json.dumps(state).encode())
+            return
+
         if parsed.path != "/play":
             self.send_error(404)
             return
