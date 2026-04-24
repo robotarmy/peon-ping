@@ -213,7 +213,7 @@ ROVOEOF
     echo "Restart Rovo Dev CLI for hooks to take effect."
   else
     echo "Error: ~/.rovodev directory not found" >&2
-    echo "For manual setup, see: https://github.com/PeonPing/peon-ping#rovo-dev-cli-setup"
+    echo "For manual setup, see: https://github.com/robotarmy/peon-ping#rovo-dev-cli-setup"
     exit 1
   fi
   exit 0
@@ -242,7 +242,7 @@ fi
 INSTALL_DIR="$BASE_DIR/hooks/peon-ping"
 SETTINGS="$BASE_DIR/settings.json"
 
-REPO_BASE="https://raw.githubusercontent.com/PeonPing/peon-ping/main"
+REPO_BASE="https://raw.githubusercontent.com/robotarmy/peon-ping/main"
 REGISTRY_URL="https://peonping.github.io/registry/index.json"
 
 if [ "$INIT_LOCAL_CONFIG" = true ]; then
